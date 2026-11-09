@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LL Wealth — Planejamento Patrimonial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy: #0F1B3D;
+  --navy-dark: #090f22;
+  --navy-mid: #142147;
+  --accent: #c8a96e;
+  --accent-light: #e0c99a;
+  --white: #ffffff;
+  --off-white: #f8f8f6;
+  --light-gray: #f2f2f0;
+  --text-dark: #111111;
+  --text-mid: #3a3a3a;
+  --text-muted: #767676;
+  --border: #e2e2de;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 2rem;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(9, 15, 34, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(200,169,110,0.15);
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-cta {
+  background: var(--accent);
+  color: var(--navy-dark);
+  padding: 0.55rem 1.4rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.nav-cta:hover {
+  background: var(--accent-light);
+  color: var(--navy-dark);
+}
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  background: var(--navy-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 2rem 0;
+}
+
+.hero-bg-shape {
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 520px;
+  height: 520px;
+  border: 1px solid rgba(200,169,110,0.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-bg-shape::before {
+  content: '';
+  position: absolute;
+  inset: 60px;
+  border: 1px solid rgba(200,169,110,0.08);
+  border-radius: 50%;
+}
+
+.hero-bg-shape::after {
+  content: '';
+  position: absolute;
+  inset: 120px;
+  border: 1px solid rgba(200,169,110,0.06);
+  border-radius: 50%;
+}
+
+.hero-line-v {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(200,169,110,0.05);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-label::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 600;
+  line-height: 1.18;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  max-width: 540px;
+}
+
+.hero-headline em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.65);
+  max-width: 440px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--navy-dark);
+  padding: 0.9rem 2rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: var(--accent-light);
+  color: var(--navy-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  padding: 0.9rem 2rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Hero side visual */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-emblem {
+  width: 280px;
+  height: 280px;
+  border: 1px solid rgba(200,169,110,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-emblem::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border: 1px solid rgba(200,169,110,0.15);
+  border-radius: 50%;
+}
+
+.hero-emblem-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.hero-monogram {
+  font-family: var(--font-serif);
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-monogram span {
+  color: var(--accent);
+}
+
+.hero-monogram-sub {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.4rem;
+}
+
+/* Hero disclaimer */
+.hero-disclaimer {
+  margin-top: auto;
+  padding: 1.25rem 2rem;
+  background: rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(200,169,110,0.1);
+  max-width: 100%;
+}
+
+.hero-disclaimer p {
+  max-width: 1100px;
+  margin: 0 auto;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.45);
+  font-weight: 400;
+}
+
+/* TRUST BAR */
+#trust {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 2rem;
+}
+
+.trust-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.trust-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.trust-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trust-text strong {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.2rem;
+}
+
+.trust-text span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* SECTION LABEL */
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-label.light {
+  color: rgba(255,255,255,0.45);
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+}
+
+/* ESPECIALIDADES */
+#especialidades {
+  background: var(--white);
+  padding: 6rem 2rem;
+}
+
+.especialidades-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.especialidades-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.especialidades-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--navy);
+  max-width: 400px;
+}
+
+.especialidades-headline em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.especialidades-desc {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+.especialidades-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5px;
+  background: var(--border);
+}
+
+.espec-card {
+  background: var(--white);
+  padding: 2rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.espec-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+}
+
+.espec-card:hover::before {
+  width: 100%;
+}
+
+.espec-num {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgba(15,27,61,0.08);
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.espec-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.01em;
+}
+
+.espec-desc {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* SOBRE */
+#sobre {
+  background: var(--off-white);
+  padding: 6rem 2rem;
+}
+
+.sobre-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.sobre-left {
+  position: relative;
+}
+
+.sobre-visual {
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: var(--navy);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sobre-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0F1B3D 0%, #1a2f5e 50%, #0a1228 100%);
+}
+
+.sobre-visual-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+}
+
+.sobre-visual-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.sobre-visual-num {
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  display: block;
+}
+
+.sobre-visual-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.sobre-visual-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+  margin: 1.5rem auto;
+}
+
+.sobre-visual-num2 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--white);
+  display: block;
+}
+
+.sobre-visual-label2 {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.sobre-accent-line {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -1.5rem;
+  width: 60%;
+  height: 60%;
+  border: 1px solid rgba(200,169,110,0.2);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sobre-right {
+  position: relative;
+  z-index: 1;
+}
+
+.sobre-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--navy);
+  margin-bottom: 1.25rem;
+}
+
+.sobre-headline em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.sobre-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: 2rem;
+}
+
+.sobre-valores-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.sobre-valores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.valor-tag {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: 0.03em;
+}
+
+.valor-tag:hover {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* MISSAO STRIP */
+#missao {
+  background: var(--navy);
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(200,169,110,0.1);
+}
+
+.missao-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.missao-label-col .section-label {
+  color: var(--accent);
+}
+
+.missao-label-col .section-label::before {
+  background: var(--accent);
+}
+
+.missao-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--white);
+  font-style: italic;
+}
+
+.missao-quote strong {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* CTA FINAL */
+#cta-final {
+  background: var(--navy-dark);
+  padding: 7rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-bg-line1 {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 1px;
+  background: rgba(200,169,110,0.06);
+}
+
+.cta-bg-arc {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(200,169,110,0.08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cta-bg-arc::before {
+  content: '';
+  position: absolute;
+  inset: 50px;
+  border: 1px solid rgba(200,169,110,0.05);
+  border-radius: 50%;
+}
+
+.cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+
+.cta-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.cta-headline em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.cta-sub {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.btn-wa {
+  background: #25D366;
+  color: var(--white);
+  padding: 1rem 2.25rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+
+.btn-wa:hover {
+  background: #1db954;
+  color: var(--white);
+}
+
+.btn-wa svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.btn-email {
+  background: transparent;
+  color: rgba(255,255,255,0.65);
+  font-size: 0.8rem;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-email:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* FOOTER */
+footer {
+  background: #070c1a;
+  padding: 4rem 2rem 2rem;
+  border-top: 1px solid rgba(200,169,110,0.1);
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 2rem;
+}
+
+.footer-brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand-name span {
+  color: var(--accent);
+}
+
+.footer-brand-desc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.4);
+  max-width: 300px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-contact-items a {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.footer-contact-items a:hover {
+  color: var(--accent);
+}
+
+.footer-col-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 1.25rem;
+}
+
+.footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-nav-list a {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.footer-nav-list a:hover {
+  color: var(--white);
+}
+
+.footer-valores-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-valores-list li {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.01em;
+}
+
+.footer-disclaimer {
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(200,169,110,0.1);
+  border-radius: 2px;
+  margin-bottom: 2rem;
+}
+
+.footer-disclaimer p {
+  font-size: 0.75rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.4);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.25);
+}
+
+.footer-awt {
+  font-size: 0.72rem;
+  color: rgba(200,169,110,0.5);
+  letter-spacing: 0.05em;
+}
+
+/* HAMBURGER */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 2px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .especialidades-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-hamburger {
+    display: flex;
+  }
+  
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: left;
+  }
+  .hero-visual {
+    display: none;
+  }
+  
+  .trust-inner {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  
+  .especialidades-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .especialidades-desc {
+    max-width: 100%;
+  }
+  
+  .especialidades-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+  }
+  
+  .sobre-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .sobre-left {
+    max-width: 400px;
+  }
+  
+  .missao-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .cta-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .cta-buttons {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .footer-top > :first-child {
+    grid-column: 1 / -1;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 540px) {
+  nav {
+    padding: 0 1.25rem;
+  }
+  #hero {
+    padding: 100px 1.25rem 0;
+  }
+  
+  .hero-ctas {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .especialidades-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  #sobre, #especialidades, #cta-final {
+    padding: 4rem 1.25rem;
+  }
+  
+  #missao {
+    padding: 3rem 1.25rem;
+  }
+  
+  footer {
+    padding: 3rem 1.25rem 1.5rem;
+  }
+  
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">LL<span> Wealth</span></a>
+  <ul class="nav-links">
+    <li><a href="#especialidades">Especialidades</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#cta-final" class="nav-cta">Agende uma conversa</a></li>
+  </ul>
+  <div class="nav-hamburger" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-line-v"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-label">Multi Family Office Independente</div>
+      <h1 class="hero-headline">
+        Patrimônio que<br>atravessa <em>gerações.</em>
+      </h1>
+      <p class="hero-sub">
+        Uma única estratégia de planejamento para organizar, estruturar e perpetuar o que você construiu — com independência, transparência e experiência de mais de 15 anos no mercado financeiro.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/5511987774464" class="btn-primary" target="_blank" rel="noopener">Agende uma conversa</a>
+        <a href="#sobre" class="btn-secondary">Conheça nossa abordagem</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-emblem">
+        <div class="hero-emblem-inner">
+          <div class="hero-monogram">LL<span>.</span></div>
+          <div class="hero-monogram-sub">Wealth</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-disclaimer">
+    <p>LL Wealth integra o ecossistema AWT Group por meio do vínculo de seus profissionais com a AWT Independence S.A. A gestão profissional de carteiras é realizada pela AWT Consultoria e Administração de Valores Mobiliários Ltda., CNPJ 35.137.445/0001-00, registrada perante a CVM.</p>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section id="trust">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div class="trust-text">
+        <strong>Mais de 15 anos de experiência</strong>
+        <span>Profissionais com trajetória sólida e ética no mercado financeiro.</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+      <div class="trust-text">
+        <strong>Independência e alinhamento total</strong>
+        <span>Sem conflito de interesses — planejamos exclusivamente para seu patrimônio.</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </div>
+      <div class="trust-text">
+        <strong>Visão de longo prazo</strong>
+        <span>Estratégia construída para atravessar gerações com consistência.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section id="especialidades">
+  <div class="especialidades-inner">
+    <div class="especialidades-header">
+      <div>
+        <div class="section-label">Especialidades</div>
+        <h2 class="especialidades-headline">
+          Uma estratégia completa para <em>cada dimensão</em> do seu patrimônio.
+        </h2>
+      </div>
+      <p class="especialidades-desc">
+        Mapeamos, planejamos e acompanhamos cada classe do seu patrimônio com rigor técnico e visão integrada. Tudo conectado em uma única estratégia de planejamento.
+      </p>
+    </div>
+
+    <div class="especialidades-grid">
+      <div class="espec-card">
+        <div class="espec-num">01</div>
+        <div class="espec-title">Renda Fixa</div>
+        <p class="espec-desc">Estruturação de parcela previsível e segura do patrimônio, com foco em preservação e consistência ao longo do tempo.</p>
+      </div>
+      <div class="espec-card">
+        <div class="espec-num">02</div>
+        <div class="espec-title">Renda Variável</div>
+        <p class="espec-desc">Planejamento da parcela de maior crescimento potencial, acompanhada com critério e disciplina estratégica.</p>
+      </div>
+      <div class="espec-card">
+        <div class="espec-num">03</div>
+        <div class="espec-title">Multimercado</div>
+        <p class="espec-desc">Diversificação estruturada que combina diferentes classes e estratégias para equilibrar risco e oportunidade.</p>
+      </div>
+      <div class="espec-card">
+        <div class="espec-num">04</div>
+        <div class="espec-title">Internacional / Offshore</div>
+        <p class="espec-desc">Estruturação do patrimônio além das fronteiras, com planejamento jurídico e proteção para famílias com visão global.</p>
+      </div>
+      <div class="espec-card">
+        <div class="espec-num">05</div>
+        <div class="espec-title">Crédito Privado</div>
+        <p class="espec-desc">Mapeamento de alternativas de crédito qualificado que complementam e diversificam a estratégia patrimonial.</p>
+      </div>
+      <div class="espec-card">
+        <div class="espec-num">06</div>
+        <div class="espec-title">Private Equity</div>
+        <p class="espec-desc">Acesso estruturado ao mercado de participações em empresas, com acompanhamento especializado e visão de longo prazo.</p>
+      </div>
+      <div class="espec-card">
+        <div class="espec-num">07</div>
+        <div class="espec-title">Imobiliário</div>
+        <p class="espec-desc">Planejamento da parcela real do patrimônio — ativos físicos e fundos imobiliários integrados à estratégia global.</p>
+      </div>
+      <div class="espec-card" style="background: var(--navy); display: flex; flex-direction: column; justify-content: flex-end;">
+        <div style="margin-top: auto;">
+          <div style="font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--white); line-height: 1.4; margin-bottom: 1.25rem;">Organize seu patrimônio com quem entende cada dimensão dele.</div>
+          <a href="https://wa.me/5511987774464" class="btn-primary" target="_blank" rel="noopener" style="font-size: 0.8rem; padding: 0.75rem 1.5rem;">Converse sobre seu planejamento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre-inner">
+    <div class="sobre-left">
+      <div class="sobre-visual">
+        <svg class="sobre-visual-pattern" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <circle cx="200" cy="250" r="180" stroke="rgba(200,169,110,0.3)" stroke-width="1" fill="none"/>
+          <circle cx="200" cy="250" r="130" stroke="rgba(200,169,110,0.2)" stroke-width="1" fill="none"/>
+          <circle cx="200" cy="250" r="80" stroke="rgba(200,169,110,0.15)" stroke-width="1" fill="none"/>
+          <line x1="200" y1="70" x2="200" y2="430" stroke="rgba(200,169,110,0.1)" stroke-width="1"/>
+          <line x1="20" y1="250" x2="380" y2="250" stroke="rgba(200,169,110,0.1)" stroke-width="1"/>
+        </svg>
+        <div class="sobre-visual-text">
+          <span class="sobre-visual-num">15+</span>
+          <span class="sobre-visual-label">anos de mercado</span>
+          <div class="sobre-visual-divider"></div>
+          <span class="sobre-visual-num2">LL Wealth</span>
+          <span class="sobre-visual-label2">Multi Family Office</span>
+        </div>
+      </div>
+      <div class="sobre-accent-line"></div>
+    </div>
+
+    <div class="sobre-right">
+      <div class="section-label" style="margin-bottom: 1.25rem;">Sobre nós</div>
+      <h2 class="sobre-headline">
+        Experiência e ética que seu patrimônio <em>necessita.</em>
+      </h2>
+      <p class="sobre-text">
+        A LL Wealth nasceu para servir jovens empresários e famílias que estão construindo ou consolidando seu patrimônio — e que entendem que organização, estrutura e planejamento são tão importantes quanto os resultados de curto prazo.
+      </p>
+      <p class="sobre-text">
+        Com mais de 15 anos de atuação no mercado financeiro, nossos profissionais combinam profundidade técnica com escuta genuína. Mapeamos a realidade de cada família, estruturamos uma estratégia singular e acompanhamos cada passo com transparência e compromisso.
+      </p>
+      <p class="sobre-valores-label">Nossos valores</p>
+      <div class="sobre-valores">
+        <span class="valor-tag">Independência</span>
+        <span class="valor-tag">Transparência</span>
+        <span class="valor-tag">Ética</span>
+        <span class="valor-tag">Compromisso</span>
+        <span class="valor-tag">Experiência</span>
+      </div>
+      <a href="https://wa.me/5511987774464" class="btn-primary" target="_blank" rel="noopener" style="background: var(--navy); color: var(--white);">Organize seu patrimônio</a>
+    </div>
+  </div>
+</section>
+
+<!-- MISSÃO STRIP -->
+<section id="missao">
+  <div class="missao-inner">
+    <div class="missao-label-col">
+      <div class="section-label" style="color: var(--accent);">Nossa missão</div>
+    </div>
+    <blockquote class="missao-quote">
+      "Proteger, estruturar e planejar o patrimônio das famílias — garantindo sua <strong>preservação e perpetuidade</strong> ao longo das gerações."
+    </blockquote>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-bg-line1"></div>
+  <div class="cta-bg-arc"></div>
+  <div class="cta-inner">
+    <div>
+      <div class="section-label light" style="margin-bottom: 1.5rem;">Próximo passo</div>
+      <h2 class="cta-headline">
+        Dê o próximo passo para<br><em>estruturar seu patrimônio.</em>
+      </h2>
+      <p class="cta-sub">
+        Uma conversa sem compromisso para entender onde você está, onde quer chegar e como podemos construir juntos uma estratégia de planejamento para o seu legado.
+      </p>
+    </div>
+    <div class="cta-buttons">
+      <a href="https://wa.me/5511987774464" class="btn-wa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Agende uma conversa
+      </a>
+      <a href="mailto:francalauria01@gmail.com" class="btn-email">francalauria01@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">LL<span> Wealth</span></div>
+        <p class="footer-brand-desc">Multi Family Office Independente dedicado ao planejamento patrimonial de empresários e famílias que constroem legados duradouros.</p>
+        <div class="footer-contact-items">
+          <a href="https://wa.me/5511987774464" target="_blank" rel="noopener">(11) 98777-4464</a>
+          <a href="mailto:francalauria01@gmail.com">francalauria01@gmail.com</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navegação</div>
+        <ul class="footer-nav-list">
+          <li><a href="#especialidades">Especialidades</a></li>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#missao">Missão</a></li>
+          <li><a href="#cta-final">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Valores</div>
+        <ul class="footer-valores-list">
+          <li>Independência</li>
+          <li>Transparência</li>
+          <li>Ética</li>
+          <li>Compromisso</li>
+          <li>Experiência</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-disclaimer">
+      <p>LL Wealth integra o ecossistema AWT Group por meio do vínculo de seus profissionais com a AWT Independence S.A. A gestão profissional de carteiras é realizada pela AWT Consultoria e Administração de Valores Mobiliários Ltda., CNPJ 35.137.445/0001-00, registrada perante a CVM.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 LL Wealth. Todos os direitos reservados.</span>
+      <span class="footer-awt">Ecossistema AWT Group</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
