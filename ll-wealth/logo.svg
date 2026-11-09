@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" width="320" height="90">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C9A84C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8C97A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: Abstract geometric symbol (two upward-rising bars forming LL shape, with a diamond accent) -->
+  <!-- Outer diamond frame -->
+  <polygon points="45,8 72,32 45,56 18,32" fill="none" stroke="#0F1B3D" stroke-width="2.2"/>
+  <!-- Inner vertical bars representing growth / LL motif -->
+  <rect x="30" y="24" width="7" height="22" rx="1" fill="#0F1B3D"/>
+  <rect x="41" y="30" width="7" height="16" rx="1" fill="#0F1B3D"/>
+  <rect x="52" y="20" width="7" height="26" rx="1" fill="#0F1B3D"/>
+  <!-- Gold accent line -->
+  <line x1="27" y1="48" x2="62" y2="48" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Small gold diamond top accent -->
+  <polygon points="45,4 48.5,10 45,16 41.5,10" fill="url(#goldGrad)"/>
+
+  <!-- Text: LL -->
+  <text
+    x="90"
+    y="52"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="42"
+    font-weight="700"
+    letter-spacing="3"
+    fill="#0F1B3D">LL</text>
+
+  <!-- Gold accent underline for LL -->
+  <rect x="90" y="58" width="68" height="2.5" rx="1.2" fill="url(#goldGrad)"/>
+
+  <!-- Text: Wealth -->
+  <text
+    x="92"
+    y="76"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="13"
+    font-weight="400"
+    letter-spacing="6"
+    fill="#0F1B3D">WEALTH</text>
+</svg>
